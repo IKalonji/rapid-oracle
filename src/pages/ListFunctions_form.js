@@ -29,6 +29,7 @@ const ListFunctions = () => {
     const service = new AppStateService();
     let yes = '';
     let paid = '';
+    const arrayIdIndex = [service.polybaseResponse[0]]
 
     const [selectedOption, setSelectedOption] = useState(null);
     const options = [
@@ -63,13 +64,14 @@ const ListFunctions = () => {
             )
 
             const db_values = {
+                id: `${arrayIdIndex.length + 1}`,
                 title: title,
                 author: author,
                 short_details: shortDescription,
                 long_details: longDescription,
                 usage: usage,
-                functionAddress: '0x1',
-                creatorAddress: '0xa5',
+                functionAddress: functionContractAddress,
+                creatorAddress: creatorAddress,
             }
 
             service.createProject(db_values);

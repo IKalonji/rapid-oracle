@@ -23,6 +23,7 @@ function App() {
   const service = new AppStateService();
 
   service.getItemsFromRecord();
+  console.log('from app: ',service.polybaseResponse);
 
   return(
     <>

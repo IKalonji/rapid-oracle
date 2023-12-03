@@ -16,11 +16,11 @@ const ViewCards = () => {
   service.getItemsFromRecord();
   const navigate = useNavigate();
 
-  const itemsArray = [service.polybaseResponse[0]];
+  const itemsArray = service.polybaseResponse;
 
   console.log(itemsArray);
 
-  console.log('from view: ',service.polybaseResponse[0]);
+  console.log('from view: ',service.polybaseResponse);
 
   return (
     <div className="p-grid p-justify-center">
@@ -36,7 +36,7 @@ const ViewCards = () => {
       </div>
       <div style={{ height: '30px' }}></div>
       <div class="pl-7 border-round">
-        <div className="pl-12 pt-6 text-3xl font-medium text-900 mb-3">Available functions <Badge  value={market_card.length}/></div>
+        <div className="pl-12 pt-6 text-3xl font-medium text-900 mb-3">Available functions <Badge  value={itemsArray.length}/></div>
     </div>
 
       <div className="flex flex-column">
@@ -80,35 +80,6 @@ const ViewCards = () => {
                 </React.Fragment>
       ))}
 
-       
-
-        {market_card.map((card, index) => (
-          <React.Fragment key={index}>
-            <Card className="w-20rem">
-              <Blockies scale={8} spotColor='#000' color='#dfe' seed={card.title} size={36} />
-              <Divider />
-
-              <span className="block text-2xl font-bold mb-1">{card.title}</span>
-              <Divider />
-
-              <div>{card.author}</div>
-              <div style={{ height: '8px' }}></div>
-
-              <div>{card.short_details}</div>
-              <Divider />
-              <Button
-                style={{ width: '100%' }}
-                label="open"
-                severity="primary"
-                size="medium"
-                onClick={() => {
-                  navigate('/view-functions-fully', { state: { ...card } });
-                }}
-              />
-              <div style={{ height: '30px' }}></div>
-            </Card>
-          </React.Fragment>
-        ))}
         <Divider />
       </div>
     </div>
