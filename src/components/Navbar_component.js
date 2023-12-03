@@ -12,7 +12,13 @@ const Navbar = () => {
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
 
-    let service = new AppStateService();
+    // let service = new AppStateService();
+    const connectWallet = async() => {
+        if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
+            const accounts = window.ethereum.request({method: "eth_requestAccounts"})
+            console.log(accounts);
+        }
+    }
 
     const startContent = (
         <React.Fragment>
@@ -53,7 +59,7 @@ const Navbar = () => {
 
     const endContent = (
         <React.Fragment>
-            <Button label='Connect wallet' icon="pi pi-id-card" className="p-button-warning mr-2" onClick={()=>service.connectToMetaMask}/>
+            <Button label='Connect wallet' icon="pi pi-id-card" className="p-button-warning mr-2" onClick={connectWallet}/>
         </React.Fragment>
     );
 
