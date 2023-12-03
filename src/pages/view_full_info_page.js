@@ -40,7 +40,7 @@ const ViewFullInfo = () => {
 
   return (
     <div>
-        <div className="bg-primary-800 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap " style={{height:"12rem", background:`url(https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Ribbons-and-Banners-PNG/Red_Banner_Transparent_PNG_Clipart.png?m=1590479490)`}}>
+        <div className="bg-primary-800 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap " style={{height:"12rem", background:`url(https://psa.gov.in/CMS/web/sites/default/files/styles/image_1366x520/public/2021-12/IIT%20Madras%20Researchers%20Develop%20Blockchain-based%20Healthcare%20Information%20Systems%20-%20header%20banner.png?itok=GqlUt3Vc)`}}>
             {/* <img src={data.image} style={{width:'180px', height:'180px', borderRadius:"20%", position:"relative", top:"45px"}}/> */}
             <div style={{borderRadius:"50%", position:"relative", top:"75px"}}> 
                 <Blockies seed={`${data.title}`} size={25} scale={8} spotColor='#7ED7C1' color='#dfe' />
@@ -78,7 +78,6 @@ const ViewFullInfo = () => {
             </Card>
 
             <Card className='shadow-5' style={{width:'70%'}}>
-            <span className="block text-2xl font-bold mb-1">Name</span>
             <span className="block text-2xl font-bold mb-1">Author: {data.author}</span>
             <div className="card">
             <TabView>
@@ -89,9 +88,6 @@ const ViewFullInfo = () => {
                     <span>Rating  </span>  :<Rating value={5} readOnly cancel={false} />
                 </TabPanel>
                 <TabPanel header="Usage">
-                    <p className="m-0">
-                        {data.usage}
-                    </p>
                     <Editor value={usage} headerTemplate={header} readOnly style={{ height: '220px' }}/>
                 </TabPanel>
 

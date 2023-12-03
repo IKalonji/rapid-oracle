@@ -148,7 +148,7 @@ const ListFunctions = () => {
                 { section === 2 && (
                     <div>
                         <label className="block text-900 font-medium mb-2">Usage</label>
-                        <Editor placeholder="Put in a little code snippet to show the usage" value={usage} onTextChange={(e) => setUsage(e.htmlValue)} headerTemplate={header} style={{ height: '320px' }} />
+                        <Editor placeholder="Put in a little code snippet to show the usage" value={usage} onTextChange={(e) => setUsage(e.textValue)} headerTemplate={header} style={{ height: '320px' }} />
                         <Divider/>
 
                         <Button label="Submit" severity="primary" className="w-full" onClick={submissionButtonEventHandling} />

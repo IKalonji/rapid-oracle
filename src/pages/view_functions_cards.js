@@ -18,10 +18,6 @@ const ViewCards = () => {
 
   const itemsArray = service.polybaseResponse;
 
-  console.log(itemsArray);
-
-  console.log('from view: ',service.polybaseResponse);
-
   return (
     <div className="p-grid p-justify-center">
       <div className="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap ">
