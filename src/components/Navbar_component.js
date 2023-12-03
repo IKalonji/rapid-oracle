@@ -53,12 +53,13 @@ const Navbar = () => {
 
     const endContent = (
         <React.Fragment>
-            <Button label='Connect wallet' icon="pi pi-id-card" className="p-button-warning mr-2" />
+            <Button label='Connect wallet' icon="pi pi-id-card" className="p-button-warning mr-2" onClick={()=>service.connectToMetaMask}/>
         </React.Fragment>
     );
 
     return (
         <div className="card">
+
             <Toolbar start={startContent} end={endContent} />
         </div>
     );

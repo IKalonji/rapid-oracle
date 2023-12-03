@@ -15,9 +15,9 @@ export class AppStateService {
 
         console.log("instance created");
         // Instantiate MetaMaskSDK
-        this.MMSDK = new MetaMaskSDK();
-        this.ethereum = this.MMSDK.getProvider();
-        this.provider = new ethers.BrowserProvider(this.ethereum);
+        const MMSDK = new MetaMaskSDK();
+        // this.ethereum = MMSDK.getProvider();
+        this.provider = new ethers.BrowserProvider(window.ethereum);
         this.walletAddress = "";
         this.connected = false;
 
@@ -64,27 +64,34 @@ export class AppStateService {
         })
     }
 
-      async connectToMetaMask() {
-        try {
-          if(!this.ethereum){
-            alert("Please install Metamask and configure Hedera Testnet")
-            throw Error("Metamask not installed");
+    async connectToMetaMask() {
+        if (window.ethereum){
+            const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+            this.walletAddress = accounts[0];
+            this.connected = true;
+        }else {
+            alert("install metamask extension!!");
         }
+        // try {
+        //   if(!this.ethereum){
+        //     alert("Please install Metamask and configure Hedera Testnet")
+        //     throw Error("Metamask not installed");
+        // }
   
-          const accounts = await this.ethereum.request({ method: 'eth_requestAccounts' });
-          alert(`Connected to: ${accounts[0]}`);
-          this.walletAddress = accounts[0];
-          this.walletConnected = true;
+        //   const accounts = await this.ethereum.request({ method: 'eth_requestAccounts' });
+        //   alert(`Connected to: ${accounts[0]}`);
+        //   this.walletAddress = accounts[0];
+        //   this.walletConnected = true;
   
-          const event = new Event("loggedIn");
-          window.dispatchEvent(event);
-          return true;
+        //   const event = new Event("loggedIn");
+        //   window.dispatchEvent(event);
+        //   return true;
           
-        } catch (error) {
-          alert("Could not connect to wallet.");
-          console.log(error);
-          return false;
-        }
+        // } catch (error) {
+        //   alert("Could not connect to wallet.");
+        //   console.log(error);
+        //   return false;
+        // }
   
   
   

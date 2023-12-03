@@ -82,7 +82,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 `
 
 const DocumentationPage = () => {
-    
+  
   return (
     <div className="flex flex-column">
         <div className='h-20' style={{height:"12px"}}></div>
