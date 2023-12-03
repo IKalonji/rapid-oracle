@@ -11,6 +11,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Checkbox } from "primereact/checkbox";
 
 import { market_card } from "../models/market_card_model";
+import { AppStateService } from "../Appstate-sevice/AppState.service";
 
 const ListFunctions = () => {
     const [section, setSection] = useState(0);
@@ -25,6 +26,7 @@ const ListFunctions = () => {
     const [checked, setChecked] = useState(false);
     const [isPaid, setIsPaid] = useState(false);
 
+    const service = new AppStateService();
     let yes = '';
     let paid = '';
 
@@ -59,6 +61,18 @@ const ListFunctions = () => {
             
                 },
             )
+
+            const db_values = {
+                title: title,
+                author: author,
+                short_details: shortDescription,
+                long_details: longDescription,
+                usage: usage,
+                functionAddress: '0x1',
+                creatorAddress: '0xa5',
+            }
+
+            service.createProject(db_values);
         }
     }
 

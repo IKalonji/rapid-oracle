@@ -11,11 +11,17 @@ import { AppStateService } from '../Appstate-sevice/AppState.service';
 const Navbar = () => {
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
-
+    const service = new AppStateService();
     const connectWallet = async() => {
         try {
             if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
-                const accounts = window.ethereum.request({method: "eth_requestAccounts"})
+                const accounts = window.ethereum.request({method: "eth_requestAccounts"}).then(() => {
+                    console.log(accounts[0]);
+                    service.walletAddress = accounts[0];
+                    service.connected = true
+                }).catch((error) => {
+                    console.log('error in singleton : ', error);
+                })
                 console.log(accounts);
             }
         } catch (error) {

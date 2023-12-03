@@ -35,7 +35,7 @@ export class AppStateService {
                 h: 'eth-personal-sign',
                 sig: await auth.ethPersonalSign(data)
         }});
-        this.collectionReference = db.collection('InfrastructureProject');
+        this.collectionReference = db.collection('RapidOracleDb');
     }
 
     generatePolybaseID = () => {
@@ -54,12 +54,13 @@ export class AppStateService {
             projectObject.usage,
             projectObject.functionAddress,
             projectObject.creatorAddress
-        ]).then((data) => {
-            console.info("data: ", data)
-            this.contractSubmitProject(projectObject.title, this.nextPolybaseRecordID)
-        }).catch((error) => {
-            console.info("error: ", error)
-        })
+        ])
+        // .then((data) => {
+        //     console.info("data: ", data)
+        //     this.contractSubmitProject(projectObject.title, this.nextPolybaseRecordID)
+        // }).catch((error) => {
+        //     console.info("error: ", error)
+        // })
     }
 
     connectToMetaMask = async ()=> {
