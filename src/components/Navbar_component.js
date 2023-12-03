@@ -13,7 +13,6 @@ const Navbar = () => {
     const navigate = useNavigate();
     const service = new AppStateService();
 
-    console.log('data in navbar: ', service.polybaseResponse[0]);
     const connectWallet = async() => {
   
         try {

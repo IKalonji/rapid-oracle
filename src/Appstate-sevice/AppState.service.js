@@ -40,12 +40,6 @@ export class AppStateService {
 
     }
 
-    async listRecords () {
-        const records = ((await this.collectionReference.get()).data);
-        console.log(records[0].data);
-        this.polybaseResponse.push(records[0].data)
-      }
-
     generatePolybaseID = () => {
         this.nextPolybaseRecordID = this.polybaseResponse.length + 1;
         return this.nextPolybaseRecordID.toString();
@@ -59,9 +53,11 @@ export class AppStateService {
             array.forEach(element => {
                 temp.push(element.data)
             });
-            console.log(temp);
+            console.log(temp[0].author);
             console.log("lenth: ", temp.length);
             this.polybaseResponse = temp;
+            // console.log('polybase response: ', this.polybaseResponse);
+            return temp;
         }).catch((error)=>{
             console.log(error)
         });

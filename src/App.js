@@ -15,8 +15,14 @@ import DocumentationPage from './pages/DocumentationPage';
 import TutorialPage from './pages/TutorialPage'
 import ManageSubscriptions from './pages/Manage_subscriptions';
 
+import { AppStateService } from './Appstate-sevice/AppState.service';
+
 
 function App() {
+
+  const service = new AppStateService();
+
+  service.getItemsFromRecord();
 
   return(
     <>
