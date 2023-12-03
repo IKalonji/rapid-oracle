@@ -15,7 +15,7 @@ import { My_functions } from '../models/manage_functions_Model';
 const ManageSubscriptions = () => {
   return (
     <div>
-        <div className="bg-primary-800 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap " style={{height:"12rem", background:`url(https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Ribbons-and-Banners-PNG/Red_Banner_Transparent_PNG_Clipart.png?m=1590479490)`}}>
+        <div className="bg-primary-800 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap " style={{height:"12rem", background:`url(https://media.cryptoglobe.com/2020/08/zeus-capital-chainlink-dont-get-fooled-768x384.jpg)`}}>
             {/* <img src={data.image} style={{width:'180px', height:'180px', borderRadius:"20%", position:"relative", top:"45px"}}/> */}
 
             <div style={{borderRadius:"50%", position:"relative", top:"75px"}}> 

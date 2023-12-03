@@ -15,11 +15,17 @@ import Lottie from 'lottie-react';
 import live from '../components/Live-Animation.json'
 
 import { AddressArray } from '../models/subscriber_address_model';
+import { AppStateService } from '../Appstate-sevice/AppState.service';
 
 const ViewFullInfo = () => {
+    const service = new AppStateService();
     const location = useLocation();
     const data = location.state;
     const [usage, setUsage] = useState(data.usage);
+
+    service.getUseAddress();
+
+    const subscribersAddress = service.userAddress;
 
     const [visible, setVisible] = useState(false);
     const footerContent = (
@@ -63,14 +69,14 @@ const ViewFullInfo = () => {
                 <ul className="list-none p-0 m-0 flex-grow-1">
                 <li className="flex align-items-center mb-3">
                         <i className="pi pi-eye text-primary-500 mr-2"></i>
-                        <span>{AddressArray.length} developes have subscribed</span>
+                        <span>{subscribersAddress.length} developes have subscribed</span>
                     </li>
                     <Divider />
                             
-                    {AddressArray.map((address, index) => (
+                    {subscribersAddress.map((address, index) => (
                         <li key={index} className="flex align-items-center mb-3">
                             <i className="pi pi-check-circle text-green-500 mr-2"></i>
-                            <span>{address.address}</span>
+                            <span>{address.creatorAddress}</span>
                         </li>
                     ))}
                             

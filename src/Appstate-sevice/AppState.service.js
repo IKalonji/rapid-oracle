@@ -2,6 +2,7 @@
 import { ethers } from 'ethers';
 import { Polybase } from "@polybase/client";
 import { Auth } from '@polybase/auth'
+import { AddressArray } from '../models/subscriber_address_model';
 
 export class AppStateService {
 
@@ -18,6 +19,7 @@ export class AppStateService {
         this.signer = this.provider.getSigner();
         this.walletAddress = "";
         this.connected = false;
+        this.userAddress = []
 
         const db = new Polybase({
             defaultNamespace: "pk/0xbd242ce427525d219c617b9856f0052b52334321d47d1793a7653cab5b2dac45792735a33e4b2789cbf8063555816d8a37226f8b393645c78244c175a010fbed/Rapid.Oracle",
@@ -47,6 +49,7 @@ export class AppStateService {
 
 
       async getItemsFromRecord () {
+        this.getUseAddress();
         await this.collectionReference.get().then((data)=>{
             let array = data.data;
             let temp = []  
@@ -75,12 +78,25 @@ export class AppStateService {
             projectObject.functionAddress,
             projectObject.creatorAddress
         ])
-        // .then((data) => {
-        //     console.info("data: ", data)
-        //     this.contractSubmitProject(projectObject.title, this.nextPolybaseRecordID)
-        // }).catch((error) => {
-        //     console.info("error: ", error)
-        // })
+    }
+
+    async getUseAddress() {
+        const records = await this.collectionReference.where('creatorAddress').get().then((data, cursor) =>{
+            let array = data.data;
+            let temp = [] ;
+            array.forEach(element => {
+                temp.push(element.data)
+                
+            });
+            this.userAddress = temp;
+
+        })
+
+        // const { data, cursor } = records;
+        // this.userAddress.push(data[0].data)
+        
+
+        console.log('data & cursor',this.userAddress);
     }
 
     connectToMetaMask = async ()=> {
