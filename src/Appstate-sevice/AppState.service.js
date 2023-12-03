@@ -19,15 +19,16 @@ export class AppStateService {
         this.walletAddress = "";
         this.connected = false;
 
+        const db = new Polybase({
+            defaultNamespace: "pk/0xbd242ce427525d219c617b9856f0052b52334321d47d1793a7653cab5b2dac45792735a33e4b2789cbf8063555816d8a37226f8b393645c78244c175a010fbed/Rapid.Oracle",
+          });
         this.nextPolybaseRecordID = null;
+        this.collectionReference = db.collection('RapidOracleDb');
 
         // this.contractPendingProjects = [];
         this.liveFunctions = [];
         this.polybaseResponse = []
 
-        const db = new Polybase({
-            defaultNamespace: "pk/0xbd242ce427525d219c617b9856f0052b52334321d47d1793a7653cab5b2dac45792735a33e4b2789cbf8063555816d8a37226f8b393645c78244c175a010fbed/Rapid.Oracle",
-          });
 
         const auth = new Auth()
         db.signer(async (data) => {
@@ -36,11 +37,34 @@ export class AppStateService {
                 sig: await auth.ethPersonalSign(data)
         }});
         this.collectionReference = db.collection('RapidOracleDb');
+
     }
+
+    async listRecords () {
+        const records = ((await this.collectionReference.get()).data);
+        console.log(records[0].data);
+        this.polybaseResponse.push(records[0].data)
+      }
 
     generatePolybaseID = () => {
         this.nextPolybaseRecordID = this.polybaseResponse.length + 1;
         return this.nextPolybaseRecordID.toString();
+    }
+
+
+      async getItemsFromRecord () {
+        await this.collectionReference.get().then((data)=>{
+            let array = data.data;
+            let temp = []  
+            array.forEach(element => {
+                temp.push(element.data)
+            });
+            console.log(temp);
+            console.log("lenth: ", temp.length);
+            this.polybaseResponse = temp;
+        }).catch((error)=>{
+            console.log(error)
+        });
     }
 
     async createProject(projectObject){

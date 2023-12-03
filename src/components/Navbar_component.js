@@ -12,7 +12,10 @@ const Navbar = () => {
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
     const service = new AppStateService();
+
+    console.log('data in navbar: ', service.polybaseResponse[0]);
     const connectWallet = async() => {
+  
         try {
             if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
                 const accounts = window.ethereum.request({method: "eth_requestAccounts"}).then(() => {
