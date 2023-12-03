@@ -12,11 +12,14 @@ const Navbar = () => {
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
 
-    // let service = new AppStateService();
     const connectWallet = async() => {
-        if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
-            const accounts = window.ethereum.request({method: "eth_requestAccounts"})
-            console.log(accounts);
+        try {
+            if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
+                const accounts = window.ethereum.request({method: "eth_requestAccounts"})
+                console.log(accounts);
+            }
+        } catch (error) {
+            console.log("refused the request to sign");
         }
     }
 
