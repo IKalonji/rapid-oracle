@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { Editor } from 'primereact/editor';
@@ -10,6 +10,7 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import Blockies from 'react-blockies'; 
+import { Toast } from 'primereact/toast';
 
 import Lottie from 'lottie-react';
 import live from '../components/Live-Animation.json'
@@ -22,15 +23,33 @@ const ViewFullInfo = () => {
     const location = useLocation();
     const data = location.state;
     const [usage, setUsage] = useState(data.usage);
+    const [visible, setVisible] = useState(false);
+    const [walletAddress, setWalletAddress] = useState("");
+    const toast = useRef(null);
 
     service.getUseAddress();
 
-    const subscribersAddress = service.userAddress;
+    const subscribersAddress = service.subscribersResponse;
 
-    const [visible, setVisible] = useState(false);
+    const handleSubscription = ()=>{
+        setVisible(false)
+        if (!walletAddress){
+            console.log("");
+            toast.current.show({severity:'warn', summary: 'Can\'t subscribe', detail:'Please fill in your address to subscribe', life: 3000});
+        }else{
+            const db_values = {
+                FunctionAddress: data.functionAddress,
+                SubscriberAddress: walletAddress,
+            }
+            service.createSubscriber(db_values)
+            toast.current.show({severity:'info', summary: 'Subscribed', detail:'Subscription successfull', life: 3000});
+            setVisible(false);
+        }
+    }
+
     const footerContent = (
         <div>
-            <Button className='w-full' label="submit" icon="pi pi-check" onClick={() => setVisible(false)} autoFocus />
+            <Button className='w-full' label="submit" icon="pi pi-check" onClick={handleSubscription} autoFocus />
         </div>
     );
 
@@ -42,10 +61,13 @@ const ViewFullInfo = () => {
         );
     };
 
+
+
     const header = renderHeader();
 
   return (
     <div>
+        <Toast ref={toast} />
         <div className="bg-primary-800 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap " style={{height:"12rem", background:`url(https://psa.gov.in/CMS/web/sites/default/files/styles/image_1366x520/public/2021-12/IIT%20Madras%20Researchers%20Develop%20Blockchain-based%20Healthcare%20Information%20Systems%20-%20header%20banner.png?itok=GqlUt3Vc)`}}>
             {/* <img src={data.image} style={{width:'180px', height:'180px', borderRadius:"20%", position:"relative", top:"45px"}}/> */}
             <div style={{borderRadius:"50%", position:"relative", top:"75px"}}> 
@@ -76,7 +98,7 @@ const ViewFullInfo = () => {
                     {subscribersAddress.map((address, index) => (
                         <li key={index} className="flex align-items-center mb-3">
                             <i className="pi pi-check-circle text-green-500 mr-2"></i>
-                            <span>{address.creatorAddress}</span>
+                            <span>{address.FunctionAddress}</span>
                         </li>
                     ))}
                             
@@ -103,8 +125,8 @@ const ViewFullInfo = () => {
             <Button  severity='primary' onClick={() => setVisible(true)} style={{position:"relative", left:"80%"}}> subscribe </Button>
             </Card>
         </div>
-        <Dialog header="Insert your contract address" draggable={false} visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent}>
-            <InputText placeholder="Enter Address here" style={{position:"relative", left:"25%"}} />
+        <Dialog header="Insert your wallet address" draggable={false} visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent}>
+            <InputText className='w-full' placeholder="Enter Address here" onChange={(e) => setWalletAddress(e.target.value)}/>
             
 
         </Dialog>

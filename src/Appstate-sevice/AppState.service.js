@@ -34,7 +34,7 @@ export class AppStateService {
         // this.contractPendingProjects = [];
         this.liveFunctions = [];
         this.polybaseResponse = []
-        this.sunscribersResponse = []
+        this.subscribersResponse = []
 
 
         const auth = new Auth()
@@ -51,7 +51,7 @@ export class AppStateService {
                 sig: await auth.ethPersonalSign(data)
             }
         })
-        this.subscriberReferance = db.collection('SubscriptionHandler');
+        this.subscriberReferance = subscriberDB.collection('SubscriptionHandler');
 
     }
 
@@ -60,15 +60,17 @@ export class AppStateService {
         return this.nextPolybaseRecordID.toString();
     }
 
-    async getSubScribers () {
-        await this.subscriberReferance.get().then((data) => {
+    async getSubScribers (address) {
+        console.log('from get: ', this.walletAddress);
+        await this.subscriberReferance.where("SubscriberAddress", "==", address).get().then((data) => {
             let array = data.data;
             let temp = [];
 
             array.forEach(element => {
                 temp.push(element.data)
             });
-            this.subscriberReferance = temp;
+            this.subscribersResponse = temp;
+            console.log(this.subscribersResponse);
             return temp;
         }).catch((error) => {
             console.log(error)
@@ -108,6 +110,15 @@ export class AppStateService {
         ])
     }
 
+    async createSubscriber(projectObject){
+        let id = this.subscribersResponse.length+1
+        await this.subscriberReferance.create([
+            id.toString(),
+            projectObject.FunctionAddress,
+            projectObject.SubscriberAddress,
+        ])
+    }
+
     async getUseAddress() {
         const records = await this.collectionReference.where('creatorAddress').get().then((data, cursor) =>{
             let array = data.data;
@@ -119,10 +130,7 @@ export class AppStateService {
             this.userAddress = temp;
 
         })
-
-        // const { data, cursor } = records;
-        // this.userAddress.push(data[0].data)
-        
+      
 
         console.log('data & cursor',this.userAddress);
     }
@@ -134,6 +142,7 @@ export class AppStateService {
                     console.log(data[0]);
                     this.walletAddress = data[0];
                     this.connected = true
+                    console.log('wallet address from singleton: ', this.walletAddress);
                 }).catch((error) => {
                     console.log('error in singleton : ', error);
                 })   
@@ -141,15 +150,5 @@ export class AppStateService {
         } catch (error) {
             console.log("refused the request to sign");
         }
-        // if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
-        //     const accounts = await window.ethereum.request({method: "eth_requestAccounts"}).then((data) => {
-        //         console.log(data[0]);
-        //         this.walletAddress = data[0];
-        //         this.connected = true
-        //     }).catch((error) => {
-        //         console.log('error in singleton : ', error);
-        //     })
-
-        // }
       }
 }

@@ -16,31 +16,9 @@ const Navbar = () => {
     const navigate = useNavigate();
     const service = new AppStateService();
 
-    // if (service.connected === true ){
-    //     setButtonText('connected')
-    // }
-
     const connect = () => {
         service.connectToMetaMask()
         setButtonText('connected')
-    }
-
-    const connectWallet = async() => {
-        try {
-            if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
-                const accounts = window.ethereum.request({method: "eth_requestAccounts"}).then((data) => {
-                    console.log(data[0]);
-                    service.walletAddress = data[0];
-                    setButtonText('connected')
-                    service.connected = true
-                }).catch((error) => {
-                    console.log('error in singleton : ', error);
-                })
-                
-            }
-        } catch (error) {
-            console.log("refused the request to sign");
-        }
     }
 
     const startContent = (

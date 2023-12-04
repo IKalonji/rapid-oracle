@@ -14,9 +14,11 @@ import { AppStateService } from '../Appstate-sevice/AppState.service';
 const ViewCards = () => {
   const service = new AppStateService();
   service.getItemsFromRecord();
+  service.getSubScribers();
   const navigate = useNavigate();
 
   const itemsArray = service.polybaseResponse;
+  const Subscribed = service.sunscribersResponse;
 
   return (
     <div className="p-grid p-justify-center">
