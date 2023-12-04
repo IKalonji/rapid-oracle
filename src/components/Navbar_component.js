@@ -16,6 +16,15 @@ const Navbar = () => {
     const navigate = useNavigate();
     const service = new AppStateService();
 
+    // if (service.connected === true ){
+    //     setButtonText('connected')
+    // }
+
+    const connect = () => {
+        service.connectToMetaMask()
+        setButtonText('connected')
+    }
+
     const connectWallet = async() => {
         try {
             if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
@@ -79,7 +88,7 @@ const Navbar = () => {
 
     const endContent = (
         <React.Fragment>
-            <Button label={buttonText} icon="pi pi-id-card" className="p-button-warning mr-2" onClick={connectWallet}/>
+            <Button label={buttonText} icon="pi pi-id-card" className="p-button-warning mr-2" onClick={connect}/>
         </React.Fragment>
     );
 

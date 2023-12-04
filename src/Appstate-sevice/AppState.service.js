@@ -128,15 +128,28 @@ export class AppStateService {
     }
 
     connectToMetaMask = async ()=> {
-        if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
-            const accounts = window.ethereum.request({method: "eth_requestAccounts"}).then(() => {
-                console.log(accounts[0]);
-                this.walletAddress = accounts[0];
-            }).catch((error) => {
-                console.log('error in singleton : ', error);
-            })
-
-
+        try {
+            if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
+                const accounts = window.ethereum.request({method: "eth_requestAccounts"}).then((data) => {
+                    console.log(data[0]);
+                    this.walletAddress = data[0];
+                    this.connected = true
+                }).catch((error) => {
+                    console.log('error in singleton : ', error);
+                })   
+            }
+        } catch (error) {
+            console.log("refused the request to sign");
         }
+        // if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
+        //     const accounts = await window.ethereum.request({method: "eth_requestAccounts"}).then((data) => {
+        //         console.log(data[0]);
+        //         this.walletAddress = data[0];
+        //         this.connected = true
+        //     }).catch((error) => {
+        //         console.log('error in singleton : ', error);
+        //     })
+
+        // }
       }
 }
