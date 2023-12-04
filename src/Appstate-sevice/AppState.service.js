@@ -24,12 +24,17 @@ export class AppStateService {
         const db = new Polybase({
             defaultNamespace: "pk/0xbd242ce427525d219c617b9856f0052b52334321d47d1793a7653cab5b2dac45792735a33e4b2789cbf8063555816d8a37226f8b393645c78244c175a010fbed/Rapid.Oracle",
           });
+        
+          const subscriberDB = new Polybase({
+            defaultNamespace: "pk/0xbd242ce427525d219c617b9856f0052b52334321d47d1793a7653cab5b2dac45792735a33e4b2789cbf8063555816d8a37226f8b393645c78244c175a010fbed/subscriptionHandler",
+          });
         this.nextPolybaseRecordID = null;
         this.collectionReference = db.collection('RapidOracleDb');
 
         // this.contractPendingProjects = [];
         this.liveFunctions = [];
         this.polybaseResponse = []
+        this.sunscribersResponse = []
 
 
         const auth = new Auth()
@@ -40,11 +45,34 @@ export class AppStateService {
         }});
         this.collectionReference = db.collection('RapidOracleDb');
 
+        subscriberDB.signer(async (data) => {
+            return {
+                h: 'eth-personal-sign',
+                sig: await auth.ethPersonalSign(data)
+            }
+        })
+        this.subscriberReferance = db.collection('SubscriptionHandler');
+
     }
 
     generatePolybaseID = () => {
         this.nextPolybaseRecordID = this.polybaseResponse.length + 1;
         return this.nextPolybaseRecordID.toString();
+    }
+
+    async getSubScribers () {
+        await this.subscriberReferance.get().then((data) => {
+            let array = data.data;
+            let temp = [];
+
+            array.forEach(element => {
+                temp.push(element.data)
+            });
+            this.subscriberReferance = temp;
+            return temp;
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 
 

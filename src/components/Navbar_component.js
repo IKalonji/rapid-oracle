@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
@@ -10,21 +10,24 @@ import { AppStateService } from '../Appstate-sevice/AppState.service';
 
 const Navbar = () => {
     const [visible, setVisible] = useState(false);
+    const [buttonText, setButtonText] = useState('Connect Wallet')
+    const [connected, setConnected] = useState(false)
+
     const navigate = useNavigate();
     const service = new AppStateService();
 
     const connectWallet = async() => {
-  
         try {
             if (typeof window != 'undefined' && typeof window.ethereum != 'undefined'){
-                const accounts = window.ethereum.request({method: "eth_requestAccounts"}).then(() => {
-                    console.log(accounts[0]);
-                    service.walletAddress = accounts[0];
+                const accounts = window.ethereum.request({method: "eth_requestAccounts"}).then((data) => {
+                    console.log(data[0]);
+                    service.walletAddress = data[0];
+                    setButtonText('connected')
                     service.connected = true
                 }).catch((error) => {
                     console.log('error in singleton : ', error);
                 })
-                console.log(accounts);
+                
             }
         } catch (error) {
             console.log("refused the request to sign");
@@ -35,13 +38,19 @@ const Navbar = () => {
         <React.Fragment>
             <Button color='blue' icon="pi pi-bars p-toolbar-separator mr-2" className="p-button mr-2" onClick={() => setVisible(true)} severity="secondary" text/>
             {/* <Button label="Rapid.Oracle" text disabled severity='info' /> */}
-            <span className='flex pl-2 pt-1 block text-1xl font-bold mb-1 text-blue-600'> Rapid.Oracle </span>
+            <div className="  p-3 m-3 flex align-items-center justify-content-center">
+                <Link to="/" class="no-underline">
+                <span className='flex pr-2 pt-1 block text-1xl font-bold mb-1 text-blue-600'>Rapid.Oracle</span>
+                    {/* Link with no underline */}
+                </Link>
+            </div>
+            
 
             <Sidebar title='Side Bar' visible={visible} onHide={() => setVisible(false)} >
 
                 <Divider />
                 <Button icon='pi pi-home' size='large' text raised className='w-full' onClick={() => {navigate('/'); setVisible(false)}}>
-                    <span className='flex pl-2 block text-1xl font-bold mb-1"'> Home </span>
+                    <span className='flex pl-6 block text-1xl font-bold mb-1"'> Home </span>
                 </Button>
 
                 <div style={{height:'5px'}}></div>
@@ -70,14 +79,14 @@ const Navbar = () => {
 
     const endContent = (
         <React.Fragment>
-            <Button label='Connect wallet' icon="pi pi-id-card" className="p-button-warning mr-2" onClick={connectWallet}/>
+            <Button label={buttonText} icon="pi pi-id-card" className="p-button-warning mr-2" onClick={connectWallet}/>
         </React.Fragment>
     );
 
     return (
         <div className="card">
 
-            <Toolbar start={startContent} end={endContent} />
+            <Toolbar className='shadow-2 ' start={startContent} end={endContent} style={{backgroundColor:"white", height:"7rem"}}/>
         </div>
     );
 }
