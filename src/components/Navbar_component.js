@@ -16,6 +16,8 @@ const Navbar = () => {
     const navigate = useNavigate();
     const service = new AppStateService();
 
+    console.log("from navbar: ", service.connected);
+
     const connect = () => {
         service.connectToMetaMask()
         setButtonText('connected')
@@ -57,8 +59,8 @@ const Navbar = () => {
                     <span className='flex pl-2 block text-1xl font-bold mb-1"'>View functions</span>
                 </Button>
                 <div style={{height:'5px'}}></div> 
-                <Button size='large' text raised style={{width:"100%"}} icon='pi pi-wrench' onClick={() => {navigate('/manage-subscriptions'); setVisible(false)}}>
-                    <span className='flex pl-2 block text-1xl font-bold mb-1"'>Manage</span>
+                <Button size='large' text raised style={{width:"100%"}} icon='pi pi-wrench' onClick={() => {navigate('/manage-subscriptions'); setVisible(false)}} disabled={!service.connected}>
+                    <span className='flex pl-2 block text-1xl font-bold mb-1"'>{service.connected ? "Manage":"connect to access"}</span>
                 </Button>
             </Sidebar>
         </React.Fragment>

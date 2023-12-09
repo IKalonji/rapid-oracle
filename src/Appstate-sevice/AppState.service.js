@@ -163,6 +163,12 @@ export class AppStateService {
     // }
 
     async getItemsFromRecord() {
+        // this.collectionReference.record("1").call("del");
+        // this.collectionReference.record("2").call("del");
+        // this.collectionReference.record("3").call("del");
+        // this.collectionReference.record("4").call("del");
+        // this.collectionReference.record("5").call("del");
+
         await this.collectionReference.get().then((data) => {
             const array = data.data;  // Check if data contains an array property
             let temp = [];

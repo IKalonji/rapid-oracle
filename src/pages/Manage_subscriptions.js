@@ -84,7 +84,7 @@ const ManageSubscriptions = () => {
                             {myListedFunctions.map((func, index) => (
                             <AccordionTab key={index} header={`function name: ${func.title}`}>
                                 <p className="m-0">
-                                    Subscriber Address: {func.functionAddress}
+                                    Function Address: {func.functionAddress}
                                 </p>
                                 <p className="m-0">
                                     Your wallet Address: {func.creatorAddress}
