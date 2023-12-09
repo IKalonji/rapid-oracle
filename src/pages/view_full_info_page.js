@@ -96,14 +96,14 @@ const ViewFullInfo = () => {
                 <ul className="list-none p-0 m-0 flex-grow-1">
                 <li className="flex align-items-center mb-3">
                         <i className="pi pi-eye text-primary-500 mr-2"></i>
-                        <span>{subscribersAddress.length} developes have subscribed</span>
+                        <span>{subscribersAddress.length} developers have subscribed</span>
                     </li>
                     <Divider />
                             
                     {subscribersAddress.map((address, index) => (
                         <li key={index} className="flex align-items-center mb-3">
                             <i className="pi pi-check-circle text-green-500 mr-2"></i>
-                            <span>{address.FunctionAddress}</span>
+                            <span className="block text-0xl font-bold mb-2 overflow-hidden text-overflow-ellipsis">{address.FunctionAddress}</span>
                         </li>
                     ))}
                             
