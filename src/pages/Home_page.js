@@ -17,8 +17,7 @@ const HomePage = () => {
                 <section>
                     <span className="block text-6xl font-bold mb-1">Create and list cross-chain</span>
                     <div className="text-6xl text-primary font-bold mb-3">Chainlink functions</div>
-                    <p className="mt-0 mb-4 text-700 line-height-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
+                    
                     <Button label="get started" type="button" className="mr-3 p-button-raised" onClick={()=> navigate('/view-functions-cards')}/>
 
                 </section>

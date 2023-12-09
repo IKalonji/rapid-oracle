@@ -11,6 +11,41 @@ import { Badge } from 'primereact/badge';
 
 import { AppStateService } from '../Appstate-sevice/AppState.service';
 
+const ChipList = ({ itemsArray }) => {
+  const navigate = useNavigate();
+
+  if (itemsArray.length >= 3) {
+    // Show the first three chips
+    const chips = itemsArray.slice(0, 3).map((item, index) => (
+      <Chip
+        key={index}
+        label={item.title}
+        clickable
+        onClick={() => {
+          navigate('/view-functions-fully', { state: { ...item } });
+        }}
+        style={{ cursor: 'pointer' }}
+      />
+    ));
+
+    return <div className="align-items-center hidden lg:flex flex flex-wrap gap-2">{chips}</div>;
+  } else if (itemsArray.length === 1) {
+    // Show a single chip for less than three items
+    return (
+      <Chip
+        label={itemsArray[0].title}
+        clickable
+        onClick={() => {
+          navigate('/view-functions-fully', { state: { ...itemsArray[0] } });
+        }}
+      />
+    );
+  } else {
+    // No chips to display
+    return null;
+  }
+};
+
 const ViewCards = () => {
   const service = new AppStateService();
   service.getItemsFromRecord();
@@ -22,13 +57,15 @@ const ViewCards = () => {
 
   return (
     <div className="p-grid p-justify-center">
-      <div className="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap ">
+      <div className="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap cursor-pointer">
         <div className="font-bold mr-8">🔥 Popular functions !</div>
         <div className="align-items-center hidden lg:flex flex flex-wrap gap-2">
 
-          <Chip label="Popular" />
+          {/* <Chip label="Popular" />
           <Chip label="popular" />
-          <Chip label="popular" />
+          <Chip label="popular" /> */}
+
+          <ChipList itemsArray={itemsArray} />
 
         </div>
       </div>
