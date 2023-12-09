@@ -74,7 +74,6 @@ const ManageSubscriptions = () => {
                 <div className='flex justify-content-center align-items-center'>
             <Card className='shadow-5' style={{width:'70%'}}>
                 <span className="block text-2xl font-bold mb-1">view your function details and subscriptions </span>
-                <h1>sub: </h1>
                 <div className="card">
                 <TabView>
                     <TabPanel header="Listed">

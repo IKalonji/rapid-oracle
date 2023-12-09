@@ -43,7 +43,7 @@ const ViewFullInfo = () => {
         }else{
             const db_values = {
                 FunctionAddress: data.functionAddress,
-                SubscriberAddress: walletAddress,
+                SubscriberAddress: walletAddress.toLowerCase(),
                 FunctionName: data.title,
             }
             service.createSubscriber(db_values)
