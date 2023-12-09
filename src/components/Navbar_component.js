@@ -68,7 +68,7 @@ const Navbar = () => {
 
     const endContent = (
         <React.Fragment>
-            <Button label={service.connected ? <p>{`${service.walletAddress.slice(0, 6)}...${service.walletAddress.slice(-4)}`}</p>: "connect"} icon="pi pi-id-card" className="p-button-warning mr-2 h-3rem" onClick={connect} />
+            <Button label={service.connected ? `${service.walletAddress.slice(0, 6)}...${service.walletAddress.slice(-4)}`: "Connect Wallet"} icon="pi pi-id-card" className="p-button-warning mr-2 h-3rem" onClick={connect} />
         </React.Fragment>
     );
 
