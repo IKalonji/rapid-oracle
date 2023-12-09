@@ -15,10 +15,12 @@ import { AppStateService } from '../Appstate-sevice/AppState.service';
 const ManageSubscriptions = () => {
     const service = new AppStateService();
     service.getSubScribers(service.walletAddress);
+    service.getMyListedFunctions()
 
     const subscribers = service.subscribersResponse;
+    const myListedFunctions = service.cretaedFunctionsresponse;
     const itemsArray = service.polybaseResponse;
-    console.log("from manage: ",  subscribers);
+    console.log("from manage: ",  myListedFunctions);
  
   return (
     <div>
@@ -44,32 +46,31 @@ const ManageSubscriptions = () => {
                         <div className="card">
                         <Accordion>
                             <div style={{ height: "200px" }}></div>
-                            {subscribers.map((func, index) => (
-                            <AccordionTab key={index} header={func.FunctionAddress}>
+                            {myListedFunctions.map((func, index) => (
+                            <AccordionTab key={index} header={`function name: ${func.title}`}>
                                 <p className="m-0">
-                                    FUnction details
+                                    Subscriber Address: {func.functionAddress}
+                                </p>
+                                <p className="m-0">
+                                    Your wallet Address: {func.creatorAddress}
                                 </p>
                             </AccordionTab>
                             ))}
                         </Accordion>        
                     </div>
-                        
                     </TabPanel>
 
                     <TabPanel header="Subscribed">
                         <Accordion >
-                                <AccordionTab header="Functions you subscribed to">
+                            {subscribers.map((func, index) => (
+                                <AccordionTab key={index} header={`function name: ${func.FunctionName}`}>
                                     <p className="m-0">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        Function address: {func.FunctionAddress}
                                     </p>
                                 </AccordionTab>
+                                ))}
                                 <div style={{height:"200px"}}></div>
-
-
-                            </Accordion>
+                        </Accordion>
                         {/* <Editor value={text} onTextChange={(e) => setText(e.htmlValue)} headerTemplate={header} readOnly style={{ height: '220px' }}/> */}
                     </TabPanel>
 

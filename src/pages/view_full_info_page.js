@@ -24,7 +24,7 @@ const ViewFullInfo = () => {
     const data = location.state;
     const [usage, setUsage] = useState(data.usage);
     const [visible, setVisible] = useState(false);
-    const [walletAddress, setWalletAddress] = useState("");
+    const [walletAddress, setWalletAddress] = useState(service.walletAddress);
     const toast = useRef(null);
 
 
@@ -44,6 +44,7 @@ const ViewFullInfo = () => {
             const db_values = {
                 FunctionAddress: data.functionAddress,
                 SubscriberAddress: walletAddress,
+                FunctionName: data.title,
             }
             service.createSubscriber(db_values)
             toast.current.show({severity:'info', summary: 'Subscribed', detail:'Subscription successfull', life: 3000});

@@ -33,8 +33,9 @@ export class AppStateService {
 
         // this.contractPendingProjects = [];
         this.liveFunctions = [];
-        this.polybaseResponse = []
-        this.subscribersResponse = []
+        this.polybaseResponse = [];
+        this.subscribersResponse = [];
+        this.cretaedFunctionsresponse = [];
 
 
         const auth = new Auth()
@@ -77,8 +78,26 @@ export class AppStateService {
         })
     }
 
+    async getMyListedFunctions() {
+        console.log('from get: ', this.walletAddress);
+        await this.collectionReference.where("creatorAddress", "==", this.walletAddress).get().then((data) => {
+            let array = data.data;
+            let temp = [];
 
-      async getItemsFromRecord () {
+            array.forEach(element => {
+                temp.push(element.data)
+            });
+            this.cretaedFunctionsresponse = temp;
+            console.log('listed',temp);
+            return temp;
+        }).catch((error) => {
+            console.log(error)
+        })
+
+    }
+
+
+    async getItemsFromRecord () {
         this.getUseAddress();
         await this.collectionReference.get().then((data)=>{
             let array = data.data;
@@ -116,6 +135,7 @@ export class AppStateService {
             id.toString(),
             projectObject.FunctionAddress,
             projectObject.SubscriberAddress,
+            projectObject.FunctionName,
         ])
     }
 

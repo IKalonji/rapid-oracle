@@ -71,7 +71,7 @@ const ListFunctions = () => {
                 long_details: longDescription,
                 usage: usage,
                 functionAddress: functionContractAddress,
-                creatorAddress: creatorAddress,
+                creatorAddress: creatorAddress.toLocaleLowerCase(),
             }
 
             service.createProject(db_values);
