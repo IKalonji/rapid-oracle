@@ -48,7 +48,6 @@ const ManageSubscriptions = () => {
                             <AccordionTab key={index} header={func.FunctionAddress}>
                                 <p className="m-0">
                                     FUnction details
-  
                                 </p>
                             </AccordionTab>
                             ))}

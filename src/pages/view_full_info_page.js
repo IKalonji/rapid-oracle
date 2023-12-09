@@ -27,12 +27,16 @@ const ViewFullInfo = () => {
     const [walletAddress, setWalletAddress] = useState("");
     const toast = useRef(null);
 
+
+
     service.getUseAddress();
+    console.log("bool value: ", service.connected);
 
     const subscribersAddress = service.subscribersResponse;
 
     const handleSubscription = ()=>{
         setVisible(false)
+
         if (!walletAddress){
             console.log("");
             toast.current.show({severity:'warn', summary: 'Can\'t subscribe', detail:'Please fill in your address to subscribe', life: 3000});
@@ -122,7 +126,16 @@ const ViewFullInfo = () => {
             </TabView>
         </div>
             <div style={{height:"20px"}}></div>
-            <Button  severity='primary' onClick={() => setVisible(true)} style={{position:"relative", left:"80%"}}> subscribe </Button>
+            <Button  severity='primary'
+             onClick={() => {
+                if (service.connected === false){
+                    toast.current.show({severity:'error', summary: 'Can\'t subscribe', detail:'Please connect your wallet to subscribe', life: 3000});
+
+                }else{
+                    setVisible(true)
+                }
+             }} 
+             style={{position:"relative", left:"80%"}}> subscribe </Button>
             </Card>
         </div>
         <Dialog header="Insert your wallet address" draggable={false} visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)} footer={footerContent}>

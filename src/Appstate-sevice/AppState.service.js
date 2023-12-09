@@ -16,7 +16,7 @@ export class AppStateService {
         console.log("instance created");
 
         this.provider = new ethers.BrowserProvider(window.ethereum);
-        this.signer = this.provider.getSigner();
+        // this.signer = this.provider.getSigner();
         this.walletAddress = "";
         this.connected = false;
         this.userAddress = []
