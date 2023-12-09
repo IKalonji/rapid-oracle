@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { Editor } from 'primereact/editor';
 import { Accordion, AccordionTab } from 'primereact/accordion';
@@ -9,18 +9,45 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import Blockies from 'react-blockies'; 
+import { ProgressBar } from 'primereact/progressbar';
 
 import { AppStateService } from '../Appstate-sevice/AppState.service';
 
 const ManageSubscriptions = () => {
     const service = new AppStateService();
-    service.getSubScribers();
-    service.getMyListedFunctions()
+    // service.getSubScribers();
+    // service.getMyListedFunctions()
 
-    const subscribers = service.subscribersResponse;
-    const myListedFunctions = service.cretaedFunctionsresponse;
+    const [subscribers, setSubscribers] = useState([]);
+    const [myListedFunctions, setMyListedFunctions] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    // const subscribers = service.subscribersResponse;
+    // const myListedFunctions = service.cretaedFunctionsresponse;
     const itemsArray = service.polybaseResponse;
     console.log("from manage: ",  myListedFunctions);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Use Promise.all to wait for both promises to resolve
+                const [subData, listData] = await Promise.all([
+                    service.getSubScribers(),
+                    service.getMyListedFunctions()
+                ]);
+
+                setSubscribers(subData);
+                setMyListedFunctions(listData);
+                setLoading(false); // Set loading to false after data is fetched
+                console.log("from manage: ", subData[0]);
+            } catch (error) {
+                console.error('Error fetching data', error);
+            }
+        };
+
+        fetchData();
+    }, []); // Empty dependency array to run only once on mount
+
  
   return (
     <div>
@@ -36,7 +63,15 @@ const ManageSubscriptions = () => {
         <div style={{height:"132px"}}></div>
 
         {/* </div> */}
-        <div className='flex justify-content-center align-items-center'>
+
+        {loading ? (
+                <div>
+                    Loading...
+                    <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
+                </div>
+            ) : (
+                // JSX to render the fetched data
+                <div className='flex justify-content-center align-items-center'>
             <Card className='shadow-5' style={{width:'70%'}}>
                 <span className="block text-2xl font-bold mb-1">view your function details and subscriptions </span>
                 <h1>sub: </h1>
@@ -79,7 +114,8 @@ const ManageSubscriptions = () => {
                 <div style={{height:"20px"}}></div>
                 {/* <Button  severity='primary' onClick={() => setVisible(true)} style={{position:"relative", left:"80%"}}> subscribe </Button> */}
                 </Card>
-        </div>
+            </div>
+            )} 
         <div style={{height:"132px"}}></div>
         
     </div>

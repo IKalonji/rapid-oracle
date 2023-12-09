@@ -61,59 +61,126 @@ export class AppStateService {
         return this.nextPolybaseRecordID.toString();
     }
 
-    async getSubScribers () {
-        console.log('from get: ', this.walletAddress);
-        await this.subscriberReferance.where("SubscriberAddress", "==", this.walletAddress).get().then((data) => {
-            let array = data.data;
-            let temp = [];
+    // getSubScribers () {
+    //     return new Promise((resolve, reject) => {
+            
+    //         console.log('from get: ', this.walletAddress);
+    //         this.subscriberReferance.where("SubscriberAddress", "==", this.walletAddress).get().then((data) => {
+    //             let array = data.data;
+    //             let temp = [];
 
+    //             array.forEach(element => {
+    //                 temp.push(element.data)
+    //             });
+    //             this.subscribersResponse = temp;
+    //             console.log(this.subscribersResponse);
+    //             resolve(temp);
+    //         }).catch((error) => {
+    //             console.log(error)
+    //             reject(error)
+    //         })
+    //     })
+    // }
+
+    async getSubScribers() {
+        try {
+            console.log('from get: ', this.walletAddress);
+            const data = await this.subscriberReferance.where("SubscriberAddress", "==", this.walletAddress).get();
+            const array = data.data;
+            let temp = [];
+    
             array.forEach(element => {
-                temp.push(element.data)
+                temp.push(element.data);
             });
+    
             this.subscribersResponse = temp;
             console.log(this.subscribersResponse);
             return temp;
-        }).catch((error) => {
-            console.log(error)
-        })
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
+
+    // getMyListedFunctions() {
+    //     return new Promise((resolve, reject) => {
+    //         console.log('from get: ', this.walletAddress);
+    //         this.collectionReference.where("creatorAddress", "==", this.walletAddress).get().then((data) => {
+    //             let array = data.data;
+    //             let temp = [];
+
+    //             array.forEach(element => {
+    //                 temp.push(element.data)
+    //             });
+    //             this.cretaedFunctionsresponse = temp;
+    //             console.log('listed',temp);
+    //             resolve(temp);
+    //         }).catch((error) => {
+    //             console.log(error);
+    //             reject(error);
+    //         })
+    //     })
+
+    // }
 
     async getMyListedFunctions() {
-        console.log('from get: ', this.walletAddress);
-        await this.collectionReference.where("creatorAddress", "==", this.walletAddress).get().then((data) => {
-            let array = data.data;
+        try {
+            console.log('from get: ', this.walletAddress);
+            const data = await this.collectionReference.where("creatorAddress", "==", this.walletAddress).get();
+            const array = data.data;
             let temp = [];
-
+    
             array.forEach(element => {
-                temp.push(element.data)
+                temp.push(element.data);
             });
+    
             this.cretaedFunctionsresponse = temp;
-            console.log('listed',temp);
+            console.log('listed', temp);
+            return temp;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+
+    // async getItemsFromRecord () {
+    //     this.getUseAddress();
+    //     await this.collectionReference.get().then((data)=>{
+    //         let array = data.data;
+    //         let temp = []  
+    //         array.forEach(element => {
+    //             temp.push(element.data)
+    //         });
+    //         console.log(temp[0].author);
+    //         console.log("lenth: ", temp.length);
+    //         this.polybaseResponse = temp;
+    //         // console.log('polybase response: ', this.polybaseResponse);
+    //         return temp;
+    //     }).catch((error)=>{
+    //         console.log(error)
+    //     });
+    // }
+
+    async getItemsFromRecord() {
+        await this.collectionReference.get().then((data) => {
+            const array = data.data;  // Check if data contains an array property
+            let temp = [];
+    
+            array.forEach(element => {
+                temp.push(element.data);
+            });
+    
+            console.log(temp[0].author);
+            console.log("length: ", temp.length);
+            this.polybaseResponse = temp;
             return temp;
         }).catch((error) => {
-            console.log(error)
-        })
-
-    }
-
-
-    async getItemsFromRecord () {
-        this.getUseAddress();
-        await this.collectionReference.get().then((data)=>{
-            let array = data.data;
-            let temp = []  
-            array.forEach(element => {
-                temp.push(element.data)
-            });
-            console.log(temp[0].author);
-            console.log("lenth: ", temp.length);
-            this.polybaseResponse = temp;
-            // console.log('polybase response: ', this.polybaseResponse);
-            return temp;
-        }).catch((error)=>{
-            console.log(error)
+            console.log(error);
+            throw error;
         });
     }
+    
 
     async createProject(projectObject){
         let id = this.generatePolybaseID()
