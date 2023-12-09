@@ -61,9 +61,9 @@ export class AppStateService {
         return this.nextPolybaseRecordID.toString();
     }
 
-    async getSubScribers (address) {
+    async getSubScribers () {
         console.log('from get: ', this.walletAddress);
-        await this.subscriberReferance.where("SubscriberAddress", "==", address).get().then((data) => {
+        await this.subscriberReferance.where("SubscriberAddress", "==", this.walletAddress).get().then((data) => {
             let array = data.data;
             let temp = [];
 

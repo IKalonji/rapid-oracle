@@ -23,10 +23,10 @@ const Navbar = () => {
 
     const startContent = (
         <React.Fragment>
-            <Button color='blue' icon="pi pi-bars p-toolbar-separator mr-2" className="p-button mr-2" onClick={() => setVisible(true)} severity="secondary" text/>
+            <Button color='blue' icon="pi pi-bars p-toolbar-separator mr-2" className="p-button mr-2" onClick={() => setVisible(true)} severity="secondary" text />
             {/* <Button label="Rapid.Oracle" text disabled severity='info' /> */}
-            <div className="  p-3 m-3 flex align-items-center justify-content-center">
-                <Link to="/" class="no-underline">
+            <div className="pl-3 mr-2 flex align-items-center justify-content-center">
+                <Link to="/" className="no-underline">
                 <span className='flex pr-2 pt-1 block text-1xl font-bold mb-1 text-blue-600'>Rapid.Oracle</span>
                     {/* Link with no underline */}
                 </Link>
@@ -66,14 +66,13 @@ const Navbar = () => {
 
     const endContent = (
         <React.Fragment>
-            <Button label={buttonText} icon="pi pi-id-card" className="p-button-warning mr-2" onClick={connect}/>
+            <Button label={buttonText} icon="pi pi-id-card" className="p-button-warning mr-2" onClick={connect} style={{position:"absolute", top:'3%', left:"85%"}}/>
         </React.Fragment>
     );
 
     return (
         <div className="card">
-
-            <Toolbar className='shadow-2 ' start={startContent} end={endContent} style={{backgroundColor:"white", height:"7rem"}}/>
+            <Toolbar className='shadow-2 ' start={startContent} end={endContent} style={{backgroundColor:"white", height:"4.84rem"}}/>
         </div>
     );
 }

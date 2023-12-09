@@ -110,7 +110,7 @@ const ViewFullInfo = () => {
                 </ul>
             </Card>
 
-            <Card className='shadow-5' style={{width:'70%'}}>
+            <Card className='shadow-5' style={{width:'70%'}} title={`Function Name: ${data.title}`}>
             <span className="block text-2xl font-bold mb-1">Author: {data.author}</span>
             <div className="card">
             <TabView>

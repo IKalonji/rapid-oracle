@@ -14,7 +14,7 @@ import { AppStateService } from '../Appstate-sevice/AppState.service';
 
 const ManageSubscriptions = () => {
     const service = new AppStateService();
-    service.getSubScribers(service.walletAddress);
+    service.getSubScribers();
     service.getMyListedFunctions()
 
     const subscribers = service.subscribersResponse;
