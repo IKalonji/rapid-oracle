@@ -51,8 +51,8 @@ const Navbar = () => {
                     <span className='flex pl-2 block text-1xl font-bold mb-1"'> Tutorials </span>
                 </Button>
                 <div style={{height:'5px'}}></div>
-                <Button size='large' text raised style={{width:"100%"}} icon='pi pi-plus' onClick={() => {navigate('/list-function'); setVisible(false)}}>
-                    <span className='flex pl-2 block text-1xl font-bold mb-1"'>List function</span>
+                <Button size='large' text raised style={{width:"100%"}} icon='pi pi-plus' onClick={() => {navigate('/list-function'); setVisible(false)}} disabled={!service.connected}>
+                    <span className='flex pl-2 block text-1xl font-bold mb-1"'>{service.connected ? "List Function":"connect to access"}</span>
                 </Button>
                 <div style={{height:'5px'}}></div> 
                 <Button size='large' text raised style={{width:"100%"}} icon='pi pi-eye' onClick={() => {navigate('/view-functions-cards'); setVisible(false)}}>
