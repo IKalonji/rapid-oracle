@@ -118,7 +118,7 @@ const ViewFullInfo = () => {
                     <p className="m-0">
                         {data.long_details}
                     </p>
-                    <span>Rating  </span>  :<Rating value={5} readOnly cancel={false} />
+                    <span className='felx justify-content-center align-items-center'>Rating  :<Rating value={5} readOnly cancel={false}  className='pl-8 pb-3'/></span>
                 </TabPanel>
                 <TabPanel header="Usage">
                     <Editor value={usage} headerTemplate={header} readOnly style={{ height: '220px' }}/>
