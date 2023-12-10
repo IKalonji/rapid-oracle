@@ -41,5 +41,54 @@ To use Rapid Oracle, you need the following:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/rapid-oracle/web3-app.git
+   git clone https://github.com/IKalonji/rapid-oracle
 ```
+### install
+
+2. ** Navigate to the project directory:**
+    ```bash
+    cd rapid-oracle
+
+    ```
+
+3. ** install dependancies **
+    ```bash
+    npm install
+    ```
+
+## Usage
+
+### Listing Functions
+
+To list a new Chainlink function, make sure your MetaMask wallet is connected, and navigate to the "List Function" page. Fill in the required details and submit the form.
+
+### Viewing Functions
+
+Explore functions listed by other users by visiting the "Explore" page. Filter functions based on your criteria and find the ones that suit your needs.
+
+### Subscribing to Functions
+
+Subscribe to functions that interest you on the "Explore" page. Receive updates and notifications when subscribed functions are updated or modified.
+
+### Managing Functions
+
+Access the "Manage Functions" page to view and manage the functions you have listed and those to which you are subscribed. Ensure your MetaMask wallet is connected for authentication.
+
+## Development
+
+Rapid Oracle is developed by two talented developers:
+
+### Frontend
+- **Developer:** Zaden Ngobeni
+
+### Smart Contracts and Backend
+- **Developer:** Issa Kalonji
+
+## Contributors
+
+- Zaden Ngobeni
+- Issa Kalonji
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Feel free to fork, modify, and use it in your projects. Happy coding!
