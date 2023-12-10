@@ -48,13 +48,12 @@ To use Rapid Oracle, you need the following:
 2. ** Navigate to the project directory:**
     ```bash
     cd rapid-oracle
-
-    ```
+```
 
 3. ** install dependancies **
     ```bash
     npm install
-    ```
+```
 
 ## Usage
 
