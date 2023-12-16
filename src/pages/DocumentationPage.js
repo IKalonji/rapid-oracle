@@ -45,27 +45,20 @@ To use Rapid Oracle, you need the following:
 
 ### Installation
 1. **Clone the repository:**
-   ${```bash
-   git clone https://github.com/IKalonji/rapid-oracle
-    ```}
-
+        git clone https://github.com/IKalonji/rapid-oracle
 
 ## Installation
 
 1. **Clone the repository:**
-    ${```bash
-    git clone https://github.com/rapid-oracle/web3-app.git
-    ```}
+    git clone https://github.com/IKalonji/rapid-oracle
+
 
 2. **Navigate to the project directory:**
-    ${```bash
     cd rapid-oracle
-    ```}
 
 3. **Install dependencies:**
-    ${```bash
     npm install
-    ```}
+
 
 ## Usage
 
