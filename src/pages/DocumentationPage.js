@@ -4,81 +4,105 @@ import { Card } from 'primereact/card';
 import ReactMarkdown from 'react-markdown';
 
 const markdown = `
+# Rapid Oracle Web3 Application
 
-![image](https://github.com/ZadenMubarak/tiola-video/assets/84284739/bda54b5a-fec4-4979-9e26-1593a93d2523)
+Welcome to Rapid Oracle, your go-to marketplace for Chainlink functions! Rapid Oracle allows users to list, discover, and interact with Chainlink functions, whether they are paid or free. In addition to exploring and listing functions, users can also subscribe to functions that meet their needs.
 
-# Getting Started with Create React App
+## Table of Contents
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+  - [Listing Functions](#listing-functions)
+  - [Viewing Functions](#viewing-functions)
+  - [Subscribing to Functions](#subscribing-to-functions)
+  - [Managing Functions](#managing-functions)
+- [Development](#development)
+  - [Frontend](#frontend)
+  - [Smart Contracts and Backend](#smart-contracts-and-backend)
+- [Contributors](#contributors)
+- [License](#license)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
 
-## Available Scripts
+1. **List Functions:** Users can list their Chainlink functions on Rapid Oracle, providing a marketplace for other users to discover and utilize.
 
-In the project directory, you can run:
+2. **Explore Functions:** Rapid Oracle serves as a hub for users to explore both free and paid Chainlink functions listed by others.
 
-### npm start
+3. **Subscribe to Functions:** Users can subscribe to functions that match their requirements, enabling them to receive updates and notifications.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4. **Manage Functions:** The application allows users to view and manage the functions they have listed, as well as those to which they are subscribed.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### npm test
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To use Rapid Oracle, you need the following:
 
-### npm run build
+- MetaMask wallet connected to the Ethereum network.
+- Internet browser with MetaMask extension installed.
 
-Builds the app for production to the build folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### npm run eject
-
-**Note: this is a one-way operation. Once you eject, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can eject at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except eject will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use eject. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### npm run build fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Installation
+1. **Clone the repository:**
+   ${```bash
+   git clone https://github.com/IKalonji/rapid-oracle
+    ```}
 
 
+## Installation
+
+1. **Clone the repository:**
+    ${```bash
+    git clone https://github.com/rapid-oracle/web3-app.git
+    ```}
+
+2. **Navigate to the project directory:**
+    ${```bash
+    cd rapid-oracle
+    ```}
+
+3. **Install dependencies:**
+    ${```bash
+    npm install
+    ```}
+
+## Usage
+
+### Listing Functions
+
+To list a new Chainlink function, make sure your MetaMask wallet is connected, and navigate to the "List Function" page. Fill in the required details and submit the form.
+
+### Viewing Functions
+
+Explore functions listed by other users by visiting the "Explore" page. Filter functions based on your criteria and find the ones that suit your needs.
+
+### Subscribing to Functions
+
+Subscribe to functions that interest you on the "Explore" page. Receive updates and notifications when subscribed functions are updated or modified.
+
+### Managing Functions
+
+Access the "Manage Functions" page to view and manage the functions you have listed and those to which you are subscribed. Ensure your MetaMask wallet is connected for authentication.
+
+## Development
+
+Rapid Oracle is developed by two talented developers:
+
+### Frontend
+- **Developer:** Zaden Ngobeni
+
+### Smart Contracts and Backend
+- **Developer:** Issa Kalonji
+
+## Contributors
+
+- Zaden Ngobeni
+- Issa Kalonji
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Feel free to fork, modify, and use it in your projects. Happy coding!
 `
 
 const DocumentationPage = () => {
